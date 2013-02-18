@@ -12,6 +12,9 @@
 }
 
 div#help{
+    background-image: url('helpme_icon.png');
+    background-repeat:no-repeat;
+    background-position:0% 50%;
     width:70%;
     border:2px solid #779ECB;
     font-weight:bold;
@@ -21,7 +24,8 @@ div#help{
 div#help {
     background-color: #F7F3ED;
     font-size: small;
-    padding-bottom: 5px;
-    padding-left: 5px;
+    padding-bottom: 1em;
+    padding-top: 1.2em;
+    padding-left: 5.5em;
     padding-right: 5px;
 }
