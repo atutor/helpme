@@ -35,6 +35,7 @@ switch($next_help){
         if(empty($has_courses)){
             // if instructor has no course yet, display the creat course help message
                 helpme_msg('CREATE_COURSE', $help_url);
+
         } else {
             // if instructor has courses already, update helpme_user to skip this help message
             queryDB("REPLACE INTO %shelpme_user (`user_id`, `help_id`) VALUES ('%d','%d')", array(TABLE_PREFIX, $member_id, $next_help));
@@ -44,6 +45,10 @@ switch($next_help){
         break;
     case '2':
         global $_config_defaults, $_config;
+        $has_courses = queryDB("SELECT * FROM %scourses WHERE member_id='%s'", array(TABLE_PREFIX, $member_id), true);
+       if(!empty($has_courses)){
+            unset($_SESSION['message']);
+       }
         require_once(AT_INCLUDE_PATH.'lib/constants.inc.php');
         // Get the main and sidemenu course tools for the currrent course
         $main_tools = queryDB("SELECT main_links FROM %scourses WHERE course_id = '%d'", array(TABLE_PREFIX, $_SESSION['course_id']), TRUE); 
@@ -51,7 +56,7 @@ switch($next_help){
 
         // check if course tools are the same as admin created course tools
         if($main_tools['main_links'] != $_config['main_defaults'] && $side_tools['side_menu'] != $_config['side_menu']){
-            // if not the default settings, don't do anything
+            header('Location:'. $_SERVER['PHP_SELF'].'?next_help='.($next_help+1));
         } else {
             $is_defaults = '1';
         } 
