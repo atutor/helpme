@@ -19,6 +19,7 @@
     }else if($_SESSION['course_id'] == '-1'){
         $member_id = '-1';
     } 
+    
 $current_help = queryDB("SELECT help_id FROM %shelpme_user WHERE user_id ='%d'", array(TABLE_PREFIX, $member_id), true);
 
 if(!empty($current_help)){
@@ -28,7 +29,6 @@ if(!empty($current_help)){
 }
 
 if($_SESSION['valid_user']){
-
         $_custom_head .="
 <link rel=\"stylesheet\" href=\"".$_base_href."mods/helpme/module.css\" type=\"text/css\" />
 <script type=\"text/javascript\">
@@ -40,16 +40,13 @@ if($_SESSION['valid_user']){
         saveData();
         });
     });
-    
     function saveData(){  
     $.ajax({
         type: \"GET\",
         url: \"".$_base_href."mods/helpme/update_helpme.php\",
         data: { user_id: \"".$member_id."\", help_id: \"".$next_help."\" }
         }).done(function( msg ) {
-       /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".$next_help."\" );   */ 
-      /*  $(\"#help2\").load(\"http://localhost/atutorgit/mods/helpme/update_helpme.php?help_id=".$next_help."&user_id=".$member_id."&next=1\"); */
-
+       /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".$next_help."\" );    */
         });
     
     }
