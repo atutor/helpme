@@ -101,13 +101,19 @@ switch($next_help){
     case '6':
         $has_backup = queryDB("SELECT course_id FROM %sbackups WHERE course_id = '%d'", array(TABLE_PREFIX, $_SESSION['course_id']));
         if($_SESSION['course_id'] > 0 && empty($has_backup)){
-            helpme_msg('CREATE_BACKUP', $_base_href."mods/_core/backups/create.php");
+            helpme_msg(array('CREATE_BACKUP', 'http://localhost/atutorgit/mods/_core/backups/create.php','http://localhost/atutorgit/mods/_core/imscp/index.php '), '');
+               
+            //helpme_msg('CREATE_BACKUP', $_base_href.'mods/_core/backups/create.php,'.$_base_href.'mods/_core/imscp/index.php,'.$_base_href.'mods/_core/imscp/index.php,'.$_base_href.'mods/_core/imscp/index.php,'.$_base_href.'mods/_core/imscp/index.php');
         } else {
             queryDB("REPLACE INTO %shelpme_user (`user_id`, `help_id`) VALUES ('%d','%d')", array(TABLE_PREFIX, $member_id, $next_help));
         }
         break;
     case '7':
-        helpme_msg('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>');
+   
+       // helpme_msg('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>');
+    helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>', $_base_href.'help/index.php'));
+
+
         break;
 
 } // END SWITCH

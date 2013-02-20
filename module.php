@@ -48,8 +48,11 @@ if(!empty($helpme_enabled)){
 function helpme_msg($helpmsg, $help_url){
     global $msg;
     if($_SESSION['valid_user']){
-  //  unset($_SESSION['message']);
-    $msg->addHelp(array($helpmsg, $help_url));
+		if(is_array($helpmsg)){
+			$msg->addHelp($helpmsg);
+		}else{
+			$msg->addHelp(array($helpmsg, $help_url));
+		}
     }
 }
 
