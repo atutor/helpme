@@ -58,7 +58,13 @@ switch($next_help){
         helpme_msg('MANAGE_MODULE', $_base_href."mods/_core/modules/index.php");
         break;
     case '8':
-        helpme_msg('APPLY_PATCHES', $_base_href."mods/_standard/patcher/index_admin.php");
+        $services_mod = queryDB("SELECT * FROM %smodules WHERE dir_name='%s'", array(TABLE_PREFIX, "_core/services"), true);
+        if(!empty($services_mod)){
+            queryDB("REPLACE INTO %shelpme_user (`user_id`, `help_id`) VALUES ('%d','%d')",array(TABLE_PREFIX, $member_id, $next_help));
+            unset($_SESSION['message']);
+        }else{
+            helpme_msg('APPLY_PATCHES', $_base_href."mods/_standard/patcher/index_admin.php");
+        }
         break;
     case '9':
         helpme_msg('CREATE_ADMIN', $_base_href."mods/_core/users/admins/create.php");
