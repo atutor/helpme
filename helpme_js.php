@@ -11,7 +11,7 @@
 /************************************************************************/
 
     //global $_custom_head, $_base_href, $current_help;
-    global $_custom_head, $_base_href, $current_help;
+    global $_custom_head, $_base_href, $current_help, $savant;
 
     if($_SESSION['member_id']){
         $member_id = $_SESSION['member_id'];
@@ -34,7 +34,7 @@ if($_SESSION['valid_user']){
 <script type=\"text/javascript\">
     jQuery(document).ready(function(){ 
        $(\"#delete\").click(function(){
-       $(this).parents(\".divClass\").animate({ opacity: 'hide' }, \"slow\");
+        $(this).parents(\".divClass\").animate({ opacity: 'hide' }, \"slow\");
       });
        $(\"#delete\").click(function(){
         saveData();
@@ -46,11 +46,13 @@ if($_SESSION['valid_user']){
         url: \"".$_base_href."mods/helpme/update_helpme.php\",
         data: { user_id: \"".$member_id."\", help_id: \"".$next_help."\" }
         }).done(function( msg ) {
-       /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".$next_help."\" );    */
+        $('#delete').append(data);
+               /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".$next_help."\");*/
+              /*  $(\".divClass\").load(\"".$_base_href."mods/helpme/update_helpme.php?user_id=".$member_id."&next_helpme=".$next_help."\").animate({ opacity: 'show' }, \"10000\"); */
+           /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".($next_help+1)."\" ); */
         });
-    
     }
-    saveData();
+   /*  saveData(); */
 </script>";
 }
 ?>

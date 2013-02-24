@@ -9,8 +9,13 @@
 /* modify it under the terms of the GNU General Public License          */
 /* as published by the Free Software Foundation.                        */
 /************************************************************************/
+define('AT_INCLUDE_PATH', '../../include/');
+require_once(AT_INCLUDE_PATH.'vitals.inc.php');
+global $msg, $_base_href, $savant;
+if(isset($_GET['next_helpme'])){
+    $next_help = $_GET['next_helpme'];
+}
 
-global $msg;
 switch($next_help){
     case '1':
     /////////
@@ -64,11 +69,12 @@ switch($next_help){
 
 } // END SWITCH
 
-/*
-function helpme_msg($helpmsg, $help_url){
-    global $msg;
-    unset($_SESSION['message']);
-    $msg->addHelp(array($helpmsg, $help_url));
-}
-*/
+/////////
+//
+// UPDATE THE NUMBER FOLLOWING WITH THE NUMBER OF CASES ABOVE
+//
+/////////
+$helpme_total = '10'; 
+$savant->assign('helpme_total', $helpme_total);
+$savant->assign('helpme_count', $next_help);
 ?>

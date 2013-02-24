@@ -3,6 +3,7 @@
 .divClass .deleteDiv {
      margin-left:auto;
      margin-right:auto;
+     margin-top:-1.1em;
     float:right;
     clear:right;
 	cursor: pointer;
@@ -12,9 +13,10 @@
 }
 
 div#help{
-    background-image: url('helpme_icon.png');
+    background-image: url('images/helpme_icon.png');
     background-repeat:no-repeat;
     background-position:0% 50%;
+    /*background-position:left bottom;*/
     width:70%;
     border:2px solid #779ECB;
     font-weight:bold;
@@ -26,7 +28,18 @@ div#help {
     background-color: #F7F3ED;
     font-size: small;
     padding-bottom: 1em;
-    padding-top: 1.2em;
+    padding-top: 1.3em;
     padding-left: 5.5em;
     padding-right: 5px;
+}
+div.helpme_count{
+    float:right;
+    clear:right;
+    font-weight: 400;
+    font-size:7pt;
+    border:1px solid #779ECB;
+    padding:.2em;
+    margin-top:-1em;
+    margin-bottom:1.5em;
+    margin-right:.3em;
 }

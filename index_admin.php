@@ -42,38 +42,38 @@ $help_messages = queryDB('SELECT * FROM %slanguage_text WHERE term LIKE "AT_HELP
 
 ?>
 <div class="input-form">
-<fieldset class="group_form">
-<p><?php echo _AT('helpme_text');  ?></p>
-<br/><br />
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="input-form">
-<label for=""><?php echo _AT('helpme_disable'); ?></label><input type="checkbox" name="helpme_disable" value="1" <?php if(!isset($_config['disable_helpme'])){ echo 'checked="checked"'; } ?> />
-<input type="submit" name="submit_disable" value="<?php echo _AT('save'); ?>">
-    (<strong><?php if(isset($_config['disable_helpme'])){ 
-        echo _AT('disabled');
-    }else{ 
-        echo _AT('enabled'); 
-    }
-    ?></strong>)
-</form>
-</fieldset>
+    <fieldset class="group_form">
+    <p><?php echo _AT('helpme_text');  ?></p>
+    <br/><br />
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="input-form">
+            <label for=""><?php echo _AT('helpme_disable'); ?></label><input type="checkbox" name="helpme_disable" value="1" <?php if(!isset($_config['disable_helpme'])){ echo 'checked="checked"'; } ?> />
+            <input type="submit" name="submit_disable" value="<?php echo _AT('save'); ?>">
+            (<strong><?php if(isset($_config['disable_helpme'])){ 
+                echo _AT('disabled');
+            }else{ 
+                echo _AT('enabled'); 
+            }
+            ?></strong>)
+        </form>
+    </fieldset>
 </div>
 <br />
 <div class="input-form">
-<fieldset class="group_form">
-<legend class="group_form"><?php echo _AT('helpme_language'); ?></legend>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="input-form">
-<?php
-foreach($help_messages as $item =>$text){
+    <fieldset class="group_form">
+    <legend class="group_form"><?php echo _AT('helpme_language'); ?></legend>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="input-form">
+            <?php
+            foreach($help_messages as $item =>$text){
 
-echo '<strong>'._AT('helpme_message').': <label for="">'.$text['term'].'</label></strong><br/>'."\n";
-echo '<textarea id="'.$text['term'].'" name="'.$text['term'].'" rows="5" cols="80">'.$text['text'].'</textarea><br /><br />'."\n";
-}
-unset($item);
-unset($text);
-?>
-<input type="submit" name="submit_lang" value="<?php echo _AT('save'); ?>">
-</form>
-</fieldset>
+            echo '<strong>'._AT('helpme_message').': <label for="">'.$text['term'].'</label></strong><br/>'."\n";
+            echo '<textarea id="'.$text['term'].'" name="'.$text['term'].'" rows="5" cols="80">'.$text['text'].'</textarea><br /><br />'."\n";
+            }
+            unset($item);
+            unset($text);
+            ?>
+        <input type="submit" name="submit_lang" value="<?php echo _AT('save'); ?>">
+        </form>
+    </fieldset>
 </div>
 
 <?php require (AT_INCLUDE_PATH.'footer.inc.php'); ?>

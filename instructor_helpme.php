@@ -9,8 +9,13 @@
 /* modify it under the terms of the GNU General Public License          */
 /* as published by the Free Software Foundation.                        */
 /************************************************************************/
+define('AT_INCLUDE_PATH', '../../include/');
+require_once(AT_INCLUDE_PATH.'vitals.inc.php');
 
-global $msg, $_base_path;
+global $msg, $_base_href, $savant;
+if(isset($_GET['next_helpme'])){
+    $next_help = $_GET['next_helpme'];
+}
 
 switch($next_help){
     case '1':
@@ -91,7 +96,7 @@ switch($next_help){
         break;
     case '5':
         $has_enrollment = queryDB("SELECT member_id FROM %scourse_enrollment WHERE course_id = '%d'", array(TABLE_PREFIX, $_SESSION['course_id']));
-        if($_SESSION['course_id'] > 0 && empty($has_enrollment)){
+        if($_SESSION['course_id'] > 0 && count($has_enrollment) < 2){
             helpme_msg('ADD_USERS', $_base_href."mods/_core/enrolment/create_course_list.php");
         } else {
             queryDB("REPLACE INTO %shelpme_user (`user_id`, `help_id`) VALUES ('%d','%d')", array(TABLE_PREFIX, $member_id, $next_help));
@@ -101,8 +106,7 @@ switch($next_help){
     case '6':
         $has_backup = queryDB("SELECT course_id FROM %sbackups WHERE course_id = '%d'", array(TABLE_PREFIX, $_SESSION['course_id']));
         if($_SESSION['course_id'] > 0 && empty($has_backup)){
-            helpme_msg(array('CREATE_BACKUP', 'http://localhost/atutorgit/mods/_core/backups/create.php','http://localhost/atutorgit/mods/_core/imscp/index.php '), '');
-               
+            helpme_msg(array('CREATE_BACKUP', $_base_href.'mods/_core/backups/create.php',$_base_href.'mods/_core/imscp/index.php '), '');  
             //helpme_msg('CREATE_BACKUP', $_base_href.'mods/_core/backups/create.php,'.$_base_href.'mods/_core/imscp/index.php,'.$_base_href.'mods/_core/imscp/index.php,'.$_base_href.'mods/_core/imscp/index.php,'.$_base_href.'mods/_core/imscp/index.php');
         } else {
             queryDB("REPLACE INTO %shelpme_user (`user_id`, `help_id`) VALUES ('%d','%d')", array(TABLE_PREFIX, $member_id, $next_help));
@@ -111,21 +115,21 @@ switch($next_help){
     case '7':
    
        // helpme_msg('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>');
-    helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>', $_base_href.'help/index.php'));
-
-
+        helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>', $_base_href.'help/index.php'));
+    
         break;
 
 } // END SWITCH
+//echo "something";
+/////////
+//
+// UPDATE THE NUMBER FOLLOWING WITH THE NUMBER OF CASES ABOVE
+//
+////////
 
-/*
-function helpme_msg($helpmsg, $help_url){
-    global $msg;
-    if($_SESSION['valid_user']){
-        unset($_SESSION['message']);
-        $msg->addHelp(array($helpmsg, $help_url));
-    }
-}
-*/
+$helpme_total = '7'; 
 
+$savant->assign('helpme_count', $next_help);
+$savant->assign('helpme_total', $helpme_total);
+unset($next_help);
 ?>
