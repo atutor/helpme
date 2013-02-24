@@ -10,16 +10,15 @@
 /* as published by the Free Software Foundation.                        */
 /************************************************************************/
 
-    //global $_custom_head, $_base_href, $current_help;
-    global $_custom_head, $_base_href, $current_help, $savant;
 
-    if($_SESSION['member_id']){
-        $member_id = $_SESSION['member_id'];
-       //$member_id = '-1';
-    }else if($_SESSION['course_id'] == '-1'){
-        $member_id = '-1';
-    } 
-    
+global $_custom_head, $_base_href, $current_help, $savant;
+
+if($_SESSION['member_id']){
+    $member_id = $_SESSION['member_id'];
+}else if($_SESSION['course_id'] == '-1'){
+    $member_id = '-1';
+} 
+
 $current_help = queryDB("SELECT help_id FROM %shelpme_user WHERE user_id ='%d'", array(TABLE_PREFIX, $member_id), true);
 
 if(!empty($current_help)){
@@ -52,7 +51,6 @@ if($_SESSION['valid_user']){
            /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".($next_help+1)."\" ); */
         });
     }
-   /*  saveData(); */
 </script>";
 }
 ?>

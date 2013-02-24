@@ -12,9 +12,9 @@
 define('AT_INCLUDE_PATH', '../../include/');
 require_once(AT_INCLUDE_PATH.'vitals.inc.php');
 global $msg, $_base_href, $savant;
-if(isset($_GET['next_helpme'])){
-    $next_help = $_GET['next_helpme'];
-}
+//if(isset($_GET['next_helpme'])){
+//    $next_help = $_GET['next_helpme'];
+//}
 
 switch($next_help){
     case '1':
@@ -70,7 +70,7 @@ switch($next_help){
         helpme_msg('CREATE_ADMIN', $_base_href."mods/_core/users/admins/create.php");
         break;
     case '10':
-        helpme_msg('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/admin/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>');
+        helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/admin/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>', $_base_href.'help/index.php'),'');
         break;
 
 } // END SWITCH
