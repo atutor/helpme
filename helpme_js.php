@@ -45,7 +45,6 @@ if($_SESSION['valid_user']){
         url: \"".$_base_href."mods/helpme/update_helpme.php\",
         data: { user_id: \"".$member_id."\", help_id: \"".$next_help."\" }
         }).done(function( msg ) {
-        $('#delete').append(data);
                /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".$next_help."\");*/
               /*  $(\".divClass\").load(\"".$_base_href."mods/helpme/update_helpme.php?user_id=".$member_id."&next_helpme=".$next_help."\").animate({ opacity: 'show' }, \"10000\"); */
            /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".($next_help+1)."\" ); */
