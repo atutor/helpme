@@ -23,7 +23,7 @@ switch($next_help){
     // Check if Services module is installed
         $services_mod = queryDB("SELECT * FROM %smodules WHERE dir_name='%s'", array(TABLE_PREFIX, "_core/services"), true);
         if(!empty($services_mod)){
-            $help_url = $_base_href."mods/_core/service/admin/create_course.php";
+            $help_url = $_base_href."mods/_core/services/admin/create_course.php";
         }else{
             $help_url = $_base_href."mods/_core/courses/admin/create_course.php";
         }
