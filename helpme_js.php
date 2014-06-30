@@ -34,16 +34,20 @@ if($_SESSION['valid_user']){
     jQuery(document).ready(function(){ 
        $(\"#delete\").click(function(){
         $(this).parents(\".divClass\").animate({ opacity: 'hide' }, \"slow\");
+        saveData(".$next_help.");
       });
-       $(\"#delete\").click(function(){
-        saveData();
-        });
+       $(\"#dismiss_all\").click(function(){
+        $(this).parents(\".divClass\").animate({ opacity: 'hide' }, \"slow\");
+        saveData(".$helpme_total.");
+      });
+
     });
-    function saveData(){  
+    function saveData(next_help){  
     $.ajax({
         type: \"GET\",
         url: \"".$_base_href."mods/helpme/update_helpme.php\",
-        data: { user_id: \"".$member_id."\", help_id: \"".$next_help."\" }
+        //data: { user_id: \"".$member_id."\", help_id: \"".$next_help."\" }
+        data: { user_id: \"".$member_id."\", help_id: next_help }
         }).done(function( msg ) {
                /* alert( \"Data was saved: \" + \"".$_base_href."mods/helpme/update_helpme.php\" +  \"".$member_id."\" +  \"".$next_help."\");*/
               /*  $(\".divClass\").load(\"".$_base_href."mods/helpme/update_helpme.php?user_id=".$member_id."&next_helpme=".$next_help."\").animate({ opacity: 'show' }, \"10000\"); */

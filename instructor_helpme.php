@@ -115,7 +115,7 @@ switch($next_help){
     case '7':
    
        // helpme_msg('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>');
-        helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>', $_base_href.'help/index.php'),'');
+        helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/instructor/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">'._AT('atutor_handbook').'</a>', $_base_href.'help/index.php'),'');
     
         break;
 
@@ -127,8 +127,7 @@ switch($next_help){
 //
 ////////
 
-$helpme_total = '7'; 
-
+//$helpme_total = '7'; 
 $savant->assign('helpme_count', $next_help);
 $savant->assign('helpme_total', $helpme_total);
 unset($next_help);

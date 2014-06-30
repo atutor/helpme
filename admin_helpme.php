@@ -70,7 +70,7 @@ switch($next_help){
         helpme_msg('CREATE_ADMIN', $_base_href."mods/_core/users/admins/create.php");
         break;
     case '10':
-        helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/admin/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">Official ATutor Handbook</a>', $_base_href.'help/index.php'),'');
+        helpme_msg(array('READ_HANDBOOK', '<a target="_new" onclick="ATutor.poptastic(\''.$_base_href.'documentation/admin/index.php?en\'); return false;" href="documentation/index_list.php?lang=en">'._AT('atutor_handbook').'</a>', $_base_href.'help/index.php'),'');
         break;
 
 } // END SWITCH
@@ -80,7 +80,7 @@ switch($next_help){
 // UPDATE THE NUMBER FOLLOWING WITH THE NUMBER OF CASES ABOVE
 //
 /////////
-$helpme_total = '10'; 
+//$helpme_total = '10'; 
 $savant->assign('helpme_total', $helpme_total);
 $savant->assign('helpme_count', $next_help);
 ?>

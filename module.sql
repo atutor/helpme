@@ -11,6 +11,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','helpme','HelpMe',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','helpme_text','The HelpMe module presents a short series of prompts for new Administrators and Instructors  to help them quickly learn to use ATutor effectively. Click on checkbox below to enable or disable HelpMe. Use the HelpMe Language form below to modify the help messages presented to new users.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','helpme_disable','Enable/Disable HelpMe',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','helpme_dismiss','Dismiss',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','helpme_dismiss_all','Dismiss All',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','helpme_language','HelpMe Language',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','helpme_message','Message',NOW(),'');
 
