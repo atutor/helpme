@@ -24,7 +24,15 @@ if (admin_authenticate(AT_ADMIN_PRIV_HELPME, TRUE) || admin_authenticate(AT_ADMI
     $this->_pages['mods/helpme/index_admin.php']['title_var'] = 'helpme';
     $this->_pages['mods/helpme/index_admin.php']['parent']    = AT_NAV_ADMIN;
 }
+if (admin_authenticate(AT_ADMIN_PRIV_ADMIN, TRUE)) {
+global $helpme_total;
+$helpme_total = '10'; 
+}
 
+if($_SESSION['is_admin']){
+global $helpme_total;
+$helpme_total = '7'; 
+}
 global $_config, $_custom_head;
 $helpme_enabled = queryDB("SELECT dir_name from %smodules WHERE dir_name='helpme' && status='2'", array(TABLE_PREFIX), TRUE);
 
@@ -53,8 +61,7 @@ function helpme_msg($helpmsg, $help_url){
 		}else{
 			$msg->addHelp(array($helpmsg, $help_url));
 		}
-    }
+    } 
 }
-
 
 ?>
