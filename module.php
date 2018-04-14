@@ -43,7 +43,7 @@ if(!empty($is_instructor)){
 	if($_SESSION['course_id'] == 0){
 		$helpme_total = 1;
 	} else if ($_SESSION['course_id'] > 0){
-		$helpme_total = 6;
+		$helpme_total = 7;
 	}
 }
 global $_config, $_custom_head;

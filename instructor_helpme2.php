@@ -22,6 +22,7 @@ if($current_help['help_id'] <= $helpme_total){
 
     } else if ($_SESSION['course_id'] > 0){
         $myhelp .= helpme_msg('COURSE_TOOLS', $_base_href."mods/_standard/course_tools/modules.php");
+        $myhelp .= helpme_msg('MANAGE_ONOFF', '');
         $myhelp .= helpme_msg('COURSE_PROPERTIES', $_base_path."mods/_core/properties/course_properties.php");
         $myhelp .= helpme_msg('CREATE_CONTENT', $_base_href."mods/_core/editor/add_content.php");
         $myhelp .= helpme_msg('ADD_USERS', $_base_href."mods/_core/enrolment/create_course_list.php");
