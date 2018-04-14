@@ -2,11 +2,8 @@ ATutor HelpMe Module README
 
 This module presents a series of messages to help new instructors and administrators learn the basic features of ATutor, and quickly become proficient users. 
 
-Administrator can enable and disable the module and modify the help messages to their needs. 
+Administrators can enable and disable the module, and modify the help messages to their needs. 
 
 To Do:
-"Dismiss all" help link for those who don't need it.
-"Reset help" link to play the help messages again.
-Open next message when one is closed, via ajax
 Student Help: ?? 
 
