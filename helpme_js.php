@@ -17,6 +17,15 @@ if($_SESSION['member_id'] || $_SESSION['is_admin']){
 }else if($_SESSION['course_id'] == '-1'){
     $member_id = '-1';
 } 
+
+if($_SESSION['course_id'] == 0){
+    //unset($_COOKIE["nexthelp_cookie"]);
+    //setcookie("nexthelp_cookie", "1", "/");
+    //setcookie("nexthelp_cookie", "1", "1", "/");
+   // $_COOKIE["nexthelp_cookie"] = 1;
+    
+}
+
 if(!defined($_COOKIE["nexthelp_cookie"]) || $_COOKIE["nexthelp_cookie"] == 0){
 
     $current_help = queryDB("SELECT help_id FROM %shelpme_user WHERE user_id ='%d'", array(TABLE_PREFIX, $member_id), true);
@@ -44,7 +53,18 @@ if(!defined($_COOKIE["nexthelp_cookie"]) || $_COOKIE["nexthelp_cookie"] == 0){
     $next_help = ($_COOKIE["nexthelp_cookie"]);
 }
 
-if($_SESSION['valid_user']){
+if($next_help > $helpme_total){
+    $_custom_head .="
+    <script src=\"".$_base_href."mods/helpme/js.cookie-2.2.0.min.js\"></script>
+    <link rel=\"stylesheet\" href=\"".$_base_href."mods/helpme/module.css\" type=\"text/css\" />
+    <script type=\"text/javascript\">
+        jQuery(document).ready(function(){ 
+            $(\"#help\").css(\"display\",\"none\", \"!important\");
+        });
+    </script>
+    ";
+}
+if($_SESSION['valid_user'] && $next_help <= $helpme_total){
         $_custom_head .="
 <link rel=\"stylesheet\" href=\"".$_base_href."mods/helpme/module.css\" type=\"text/css\" />
 <script src=\"".$_base_href."mods/helpme/js.cookie-2.2.0.min.js\"></script>
@@ -67,10 +87,18 @@ jQuery(document).ready(function(){
          } else{
                 nexthelp = 0;
         }
-        
+        console.log(".$helpme_total.");
+        console.log(".$next_help.");
+        console.log(nexthelp);
         // Hide the message box if number viewed is greater than the total
-        if(".$next_help.">=".($helpme_total+1)."){
-            $(\"#message\").css(\"display\",\"none\");
+        if(".$next_help.">".$helpme_total."){
+            $(\"#message\").css(\"display\",\"none\", \"!important\");
+        }
+        
+        // Hide the next icon for the last message
+        if((+nexthelp+1) >=  ".$helpme_total."){
+            $(\"#delete img\").animate({ opacity: 'hide' }, \"slow\");
+            $(\"#delete img\").css(\"display\", \"none\");
         }
         
         // Hide all messages except the current one
@@ -85,13 +113,15 @@ jQuery(document).ready(function(){
             }
         });
         
-        // Hide the next icon if its the last message
+        // Hide the previous icon if its the first message
         if(".$next_help." <= 1 || Cookies.get('nexthelp_cookie') <= 1){
             $(\"#revisit img\").animate({ opacity: 'hide' }, \"slow\");
+            $(\"#revisit img\").css(\"display\", \"none\");
         } else{
            // $(\"#revisit img\").animate({ opacity: 'show' }, \"slow\");
         }
        
+       ///////
        // The delete() i.e. Next() function, updates the db and cookie, to cycle/hide/show messages
         var delete_callback = function() {          
             // Set the cookie if there isnt one, and assign the nexthelp value
@@ -126,7 +156,7 @@ jQuery(document).ready(function(){
                 
                 }else if(index == (+nexthelp+1)){
                     
-                    Cookies.set('nexthelp_cookie', ( index ));
+                    Cookies.set('nexthelp_cookie', ( index ), {path: '/'});
                     var thishelp = (+nexthelp+1);
                     if(+nexthelp > 0 && (+nexthelp+1) <".$helpme_total."){
                         $(\"#delete img\").animate({ opacity: 'show' }, \"slow\");
@@ -160,10 +190,11 @@ jQuery(document).ready(function(){
         
         $('#delete img').click(delete_callback);
 
+        ////////
         // Click or key press to dismiss all messages
        var dismiss_callback = function(){
            if (confirm('Are you sure you want to dismiss all HelpMe messages permanently?')) {  
-           
+           Cookies.set('nexthelp_cookie', (".$helpme_total."+1), { path: '/' });
                 $(this).parents(\".divClass\").animate({ opacity: 'hide' }, \"slow\");
                 saveData((".$helpme_total."+1));    
             }
@@ -174,6 +205,7 @@ jQuery(document).ready(function(){
         });
         $('#dismiss_all').click(dismiss_callback);
         
+        ////////
         // Click or keypress to reset messages back to the start
          var reset_callback = function(){
             saveData(+0);    
@@ -189,9 +221,9 @@ jQuery(document).ready(function(){
             $(\"#help li:nth-child(1)\").animate({ opacity: 'show' }, \"slow\");  
             $(\"#revisit img\").animate({ opacity: 'hide' }, \"slow\");
             $(\"#help a#delete\").animate({ opacity: 'show' }, \"slow\");
-            $(\"#delete img\").animate({ opacity: 'show' }, \"slow\");
-            url = \"https://www.rapidtables.com/web/dev/jquery-redirect.htm\";
-             window.location.reload();
+            //$(\"#delete img\").animate({ opacity: 'show' }, \"slow\");
+            //url = \"https://www.rapidtables.com/web/dev/jquery-redirect.htm\";
+            // window.location.reload();
           }  
             
         $(\"#helpme_reset\").keypress(function(event) {
@@ -199,6 +231,7 @@ jQuery(document).ready(function(){
         });
         $('#helpme_reset').click(reset_callback);
         
+        /////////
         // Click or keypress to go back through a message sequence
         var revisit_callback = function(){
                 nexthelp = Cookies.get('nexthelp_cookie');
@@ -224,8 +257,10 @@ jQuery(document).ready(function(){
         
     });
     
-    function saveData(next_help){  
+    /////////
     // Saves the current help_id to the database, and updates the counter
+    // next_help = integer 
+    function saveData(next_help){  
         $.ajax({
             type: \"GET\",
             url: \"".$_base_href."mods/helpme/update_helpme.php\",
@@ -251,6 +286,9 @@ jQuery(document).ready(function(){
                     var set=1;
                 }
         });
+    }
+    if(".$next_help.">".$helpme_total."){
+            $(\"#delete img\").css(\"display\",\"none\");
     }
 </script>";
 }

@@ -27,6 +27,9 @@ if (admin_authenticate(AT_ADMIN_PRIV_HELPME, TRUE) || admin_authenticate(AT_ADMI
 if(!$_SESSION['valid_user']){
 	setcookie('nexthelp_cookie', null, -1, '/');
 }
+if($_SESSION['course_id'] == 0){
+	//setcookie('nexthelp_cookie', null, -1, '/');
+}
 if (admin_authenticate(AT_ADMIN_PRIV_ADMIN, TRUE)) {
 	global $helpme_total;
 	$helpme_total = '10'; 
@@ -77,6 +80,7 @@ function helpme_msg($helpmsg, $help_url){
     if($_SESSION['valid_user']){
 		if(is_array($helpmsg)){
 			$msg->addHelp($helpmsg);
+			
 		}else{
 			$msg->addHelp(array($helpmsg, $help_url));
 		}
